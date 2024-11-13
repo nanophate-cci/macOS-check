@@ -1,0 +1,46 @@
+version: 2.1
+
+orbs:
+  mac: circleci/macos@2.4.0
+
+    resource_class: m2pro.medium
+    macos:
+      xcode: 16.1.0
+
+jobs:
+  mac-os:
+    parameters:
+      version:
+        default: "16.1.0"
+        type: string
+    macos:
+      xcode: << parameters.version >>
+    resource_class: m2pro.medium
+    steps:
+      - checkout
+      - run:
+          name: List Installed Simulators
+          command: xcrun simctl list devices
+
+      - run:
+          name: Boot and Check Simulator
+          command: |
+            SIMULATOR_NAME="Apple Watch Series 10 (46mm)" # Specify the simulator name you want to check
+            SIMULATOR_ID=$(xcrun simctl list devices | grep "$SIMULATOR_NAME" | grep -oE "[A-F0-9-]{36}" | head -n 1)
+            if [ -z "$SIMULATOR_ID" ]; then
+              echo "Simulator not found"
+              exit 1
+            fi
+            xcrun simctl bootstatus "$SIMULATOR_ID" -b
+            xcrun simctl boot "$SIMULATOR_ID"
+            xcrun simctl bootstatus "$SIMULATOR_ID" -b
+            echo "Simulator $SIMULATOR_NAME is booted and runnable"
+
+workflows:
+  workflow1:
+    jobs:
+      - mac-os:
+          matrix:
+            parameters:
+              version: ["16.1.0","16.0.0"]
+ 
