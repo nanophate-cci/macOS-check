@@ -28,8 +28,6 @@ jobs:
               exit 1
             fi
             xcrun simctl bootstatus "$SIMULATOR_ID" -b
-            xcrun simctl boot "$SIMULATOR_ID"
-            xcrun simctl bootstatus "$SIMULATOR_ID" -b
             echo "Simulator $SIMULATOR_NAME is booted and runnable"
 
 workflows:
