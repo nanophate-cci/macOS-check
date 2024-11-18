@@ -17,6 +17,7 @@ jobs:
       - run:
           name: List Installed Simulators
           command: xcrun simctl list devices
+      - run: echo $NAOYA
 
       - run:
           name: Boot and Check Simulator
@@ -36,5 +37,5 @@ workflows:
       - mac-os:
           matrix:
             parameters:
-              version: ["16.1.0","16.0.0","15.2.0"]
+              version: ["16.1.0","16.0.0"]
  
