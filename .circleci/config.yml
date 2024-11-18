@@ -14,7 +14,6 @@ jobs:
     #resource_class: m2pro.medium
     steps:
       - checkout
-      - run: echo "jola"
       - run:
           name: List Installed Simulators
           command: xcrun simctl list devices
