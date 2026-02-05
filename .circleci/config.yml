@@ -21,7 +21,7 @@ jobs:
       - run: echo $NAOYA
 
       - run:
-          name: Boot and Check Simulator
+          name: Boot and Check Simulator 
           command: |
             SIMULATOR_NAME="Apple Watch Series 10 (46mm)" # Specify the simulator name you want to check
             SIMULATOR_ID=$(xcrun simctl list devices | grep "$SIMULATOR_NAME" | grep -oE "[A-F0-9-]{36}" | head -n 1)
