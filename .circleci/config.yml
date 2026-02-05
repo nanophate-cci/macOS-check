@@ -7,7 +7,7 @@ jobs:
   mac-os:
     parameters:
       version:
-        default: "16.1.0"
+        default: "26.2.0"
         type: string
     macos:
       xcode: << parameters.version >>
@@ -38,5 +38,5 @@ workflows:
       - mac-os:
           matrix:
             parameters:
-              version: ["16.1.0","16.0.0"]
+              version: ["26.1.1","26.0.1"]
  
